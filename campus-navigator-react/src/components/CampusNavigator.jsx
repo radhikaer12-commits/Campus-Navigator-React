@@ -288,7 +288,15 @@ function CampusNavigator() {
                         }>
                             {modalName === "recent" && <RecentLocations />}
                             {modalName === "legend" && (
-                                <CampusLegend />
+                                <CampusLegend
+                                    isOpen={true}
+                                    onClose={() => {
+                                        setModalOpen(false);
+                                        setModalName(null);
+                                    }}
+                                    setSearch={setSearch}
+                                    setSelectedLocation={setSelectedLocation}
+                                />
                             )}
 
                             {modalName === "about" && (
