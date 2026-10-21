@@ -366,7 +366,15 @@ function CampusNavigator() {
                                 recentLocations={recentLocations} setSelectedLocation={setSelectedLocation}
                                 setIsInfoOpen={setIsInfoOpen} setModalOpen={setModalOpen} />}
                             {modalName === "legend" && (
-                                <CampusLegend />
+                                <CampusLegend
+                                    isOpen={true}
+                                    onClose={() => {
+                                        setModalOpen(false);
+                                        setModalName(null);
+                                    }}
+                                    setSearch={setSearch}
+                                    setSelectedLocation={setSelectedLocation}
+                                />
                             )}
 
                             {modalName === "about" && (
