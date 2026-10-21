@@ -18,17 +18,32 @@ import { estimatedTime } from "../utils/estimatedTime";
 import About from "./About";
 import HowToUse from "./HowToUse";
 import Toast from "./ui/Toast";
+import LeftPanel from "./LeftPanel";
+import { saveNotification } from "../utils/getNotifications";
 
 function CampusNavigator() {
     const [menuOpen, setMenuOpen] = useState(false);
 
-    const [selectedLocation, setSelectedLocation] = useState(null);
+    const [selectedLocation, setSelectedLocation] = useState(() => {
+        try {
+            const recent = JSON.parse(
+                localStorage.getItem("recentLocations")
+            ) || [];
+
+            return recent.length > 0 ? recent[0] : null;
+        } catch {
+            return null;
+        }
+    });
 
     const [search, setSearch] = useState("");
+    const [isSearchBar, setSearchBar] = useState(false);
 
     const [selectedCategory, setSelectedCategory] = useState("all");
 
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(() => {
+        return localStorage.getItem("darkMode")
+    });
 
     const [tutorialActive, setTutorialActive] = useState(false);
 
@@ -59,8 +74,57 @@ function CampusNavigator() {
     }
 
     const [toastActive, setToastActive] = useState(false);
-    const [toastContent, setToastContent] = useState(null);
-    const [mapTheme, setMapTheme] = useState("campus");
+    const [toastContent, setToastContent] = useState("map-theme");
+
+    useEffect(() => {
+        if (!toastActive) return;
+
+        let message = "";
+
+        switch (toastContent) {
+            case "currentlocation":
+                message = currentLocation
+                    ? `${currentLocation.name} has been set as your current location!`
+                    : "Your current location has been updated.";
+                break;
+
+            case "tutorial-end":
+                message = "You are all set to use Campus Navigator!";
+                break;
+
+            case "food-search":
+                message = "You are now searching Food.";
+                break;
+
+            case "food-search-exit":
+                message = "Exited food search.";
+                break;
+
+            default:
+                if (toastContent === mapTheme) {
+                    message = `Map theme changed to ${mapTheme}.`;
+                } else if (typeof toastContent === "string") {
+                    message = toastContent;
+                }
+        }
+
+        if (message) {
+            saveNotification(message);
+        }
+    }, [toastActive, toastContent]);
+
+
+    const [mapTheme, setMapTheme] = useState(() => {
+        try {
+            const saved = JSON.parse(
+                localStorage.getItem("map-theme")
+            );
+
+            return saved?.theme || "campus";
+        } catch {
+            return "campus";
+        }
+    });
 
 
     const [recentLocations, setRecentLocations] = useState(() => {
@@ -68,12 +132,27 @@ function CampusNavigator() {
             localStorage.getItem("recentLocations")
         ) || [];
     });
-    const [currentLocation, setCurrentLocation] = useState(null);
-    const changeLocation = () => {
-        setCurrentLocation(selectedLocation);
-    }
+    const [currentLocation, setCurrentLocation] = useState(() => {
+        try {
+            return JSON.parse(
+                localStorage.getItem("currentLocation")
+            );
+        } catch {
+            return null;
+        }
+    });
     const [route, setRoute] = useState([]);
     const [walkTime, setWalkTime] = useState(0);
+
+    useEffect(() => {
+        if (!toastActive) return;
+
+        const timeout = setTimeout(() => {
+            setToastActive(false);
+        }, 3000);
+
+        return () => clearTimeout(timeout);
+    }, [toastActive, toastContent]);
 
     const handleNavigationUI = () => {
         if (!currentLocation) {
@@ -143,6 +222,7 @@ function CampusNavigator() {
             "data-theme",
             darkMode ? "dark" : "light"
         );
+        localStorage.setItem("darkMode", darkMode);
 
     }, [darkMode]);
 
@@ -172,10 +252,14 @@ function CampusNavigator() {
                 onLegend={onLegend}
                 onRecent={onRecent}
                 onHowToUse={onHowToUse}
+                setToastContent={setToastContent}
+                setToastActive={setToastActive}
+                currentLocation={currentLocation}
+                setSearchBar={setSearchBar}
+                isSearchBar={isSearchBar}
 
             />
             <div>
-                <MyLocation currentLocation={currentLocation} setSelectedLocation={setSelectedLocation} />
                 <NavigationUI currentLocation={currentLocation} selectedLocation={selectedLocation}
                     walkTime={walkTime} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} filtersOpen={filtersOpen}
                     setFiltersOpen={setFiltersOpen}
@@ -184,21 +268,12 @@ function CampusNavigator() {
 
 
             <main>
-                <button id="filters-toggle-btn" onClick={() => {
-                    setFiltersOpen(!filtersOpen);
-                }}>Explore</button>
-                <Filters
-                    selectedCategory={selectedCategory}
-                    setSelectedCategory={
-                        setSelectedCategory
-                    }
-                    filtersOpen={filtersOpen}
-                    setFiltersOpen={setFiltersOpen}
+                <LeftPanel
+                    selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
+                    filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen}
+                    setMapTheme={setMapTheme} setToastActive={setToastActive} setToastContent={setToastContent}
+                    mapTheme={mapTheme}
                 />
-
-
-
-
                 <TransformWrapper
                     initialScale={1}
                     minScale={0.5}
@@ -247,6 +322,7 @@ function CampusNavigator() {
                             setMenuOpen={setMenuOpen}
                             mapTheme={mapTheme}
                             setMapTheme={setMapTheme}
+                            setSelectedCategory={setSelectedCategory}
 
                         />
 
@@ -286,7 +362,9 @@ function CampusNavigator() {
                                         ? "How to Use"
                                         : "About"
                         }>
-                            {modalName === "recent" && <RecentLocations />}
+                            {modalName === "recent" && <RecentLocations
+                                recentLocations={recentLocations} setSelectedLocation={setSelectedLocation}
+                                setIsInfoOpen={setIsInfoOpen} setModalOpen={setModalOpen} />}
                             {modalName === "legend" && (
                                 <CampusLegend />
                             )}
@@ -307,14 +385,29 @@ function CampusNavigator() {
                 {
                     toastActive && (
                         <Toast
-                            title='Explore U.'
-                            content={
+                            onClose={() => setToastActive(false)}
+                        >
+                            {toastContent === 'currentlocation' &&
                                 <>
                                     <strong>{currentLocation.name}</strong> has been set as your current location!
                                 </>
                             }
-                            onClose={() => setToastActive(false)}
-                        >
+                            {
+                                toastContent === 'tutorial-end' &&
+                                <p>You are all set to use Campus Navigator!</p>
+                            }
+                            {
+                                toastContent === 'food-search' &&
+                                <p>You are now searching <strong>Food</strong>.
+                                </p>
+                            }
+                            {
+                                toastContent === 'food-search-exit' &&
+                                <p> - Exited food search.
+                                </p>
+                            }
+                            {toastContent === mapTheme &&
+                                <p>Map Theme changed to {mapTheme}</p>}
                         </Toast>
                     )
                 }
@@ -325,6 +418,13 @@ function CampusNavigator() {
                         onClose={() =>
                             setTutorialActive(false)
                         }
+                        setFiltersOpen={setFiltersOpen}
+                        setIsInfoOpen={setIsInfoOpen}
+                        setMenuOpen={setMenuOpen}
+                        setToastContent={setToastContent}
+                        setToastActive={setToastActive}
+                        setSearchBar={setSearchBar}
+                        setSelectedLocation={setSelectedLocation}
                     />
                 )}
 

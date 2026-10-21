@@ -1,0 +1,25 @@
+#current-location-container {
+    display: flex;
+    border: 1px solid var(--border);
+    max-width: 120px;
+    overflow-x:scroll;
+}
+
+#current-location-btn {
+    text-decoration: underline;
+    max-width: 130px;
+}
+
+#current-location-container h5 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 767px) {
+    #current-location-container{
+        max-width: fit-content;
+        overflow: hidden;
+    }
+}

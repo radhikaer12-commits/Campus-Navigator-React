@@ -1,7 +1,8 @@
-function RecentLocations({ recentLocations, setSelectedLocation, setIsInfoOpen }) {
+function RecentLocations({ recentLocations, setSelectedLocation, setIsInfoOpen, setModalOpen }) {
     function handleClick(location) {
         setSelectedLocation(location);
         setIsInfoOpen(true);
+        setModalOpen(false);
     }
     function formatDate(timestamp) {
         const date = new Date(timestamp);
@@ -14,8 +15,6 @@ function RecentLocations({ recentLocations, setSelectedLocation, setIsInfoOpen }
 
     return (
         <div className="recent-locations">
-
-            <h2>Recent Locations</h2>
 
             {recentLocations.length === 0 ? (
                 <p>No recent locations</p>

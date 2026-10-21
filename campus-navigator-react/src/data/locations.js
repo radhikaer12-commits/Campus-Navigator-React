@@ -1261,7 +1261,8 @@ export const locations = [
             "Meals",
             "Snacks",
             "Beverages",
-            "Seating"
+            "Seating",
+            "Washrooms"
         ],
         subOutlets: [
             {

@@ -1,0 +1,100 @@
+
+
+#map-theme-btn:hover,
+#map-theme-btn.active {
+    background: var(--heading);
+    color: var(--text-on-dark);
+    box-shadow: 0 6px 16px rgba(38, 50, 56, 0.24);
+}
+
+/* Campus — natural greens */
+.theme-option:nth-child(1) {
+    background: #E4F1E5;
+    color: #245C35;
+    border-color: #B4D5B9;
+}
+
+/* Midnight — dark navy */
+.theme-option:nth-child(2) {
+    background: #202B43;
+    color: #DCE8FF;
+    border-color: #455A7C;
+}
+
+/* Cartographic — warm paper */
+.theme-option:nth-child(3) {
+    background: #F5EAD2;
+    color: #79552D;
+    border-color: #D9C49C;
+}
+
+/* Blueprint — technical blue */
+.theme-option:nth-child(4) {
+    background: #DCEBFA;
+    color: #174F91;
+    border-color: #A7C8EC;
+}
+
+/* Monochrome — grayscale */
+.theme-option:nth-child(5) {
+    background: #E7E7E7;
+    color: #353535;
+    border-color: #BDBDBD;
+}
+
+.theme-option {
+    border: 1px solid transparent;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+}
+
+.theme-option:hover,
+.theme-option.active {
+    box-shadow: 0 0 0 2px var(--surface);
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+    font-weight: 700;
+    transform: translateX(-5px);
+}
+
+.check {
+    display: none;
+}
+
+.theme-option.active .check {
+    display: inline;
+}
+
+#map-theme-menu {
+    position: absolute;
+    z-index: 100000;
+    left: 60px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    animation: mapMenuFadein 0.2s ease forwards;
+    width: 200px;
+    padding: 12px;
+    gap: 12px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(38, 50, 56, 0.15);
+}
+
+@keyframes mapMenuFadein {
+    0% {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+
+    50% {
+        transform: translateY(-10px);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

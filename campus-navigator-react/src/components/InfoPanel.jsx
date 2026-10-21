@@ -3,9 +3,9 @@ import { getCurrentStatus } from "../utils/status";
 
 function InfoPanel({ selectedLocation, isInfoOpen, setIsInfoOpen,setCurrentLocation, handleNavigationUI,setToastActive,setToastContent }) {
 
-    // const status = selectedLocation
-    //     ? getCurrentStatus(selectedLocation)
-    //     : null;
+    const status = selectedLocation
+        ? getCurrentStatus(selectedLocation)
+        : null;
 
     return (
         <aside id="info-panel">
@@ -63,12 +63,12 @@ function InfoPanel({ selectedLocation, isInfoOpen, setIsInfoOpen,setCurrentLocat
                                 color: `var(--${selectedLocation.category}_stroke)`
                             }}
                         >
-                            <strong>Category:</strong>{" "}
+                            <strong>Category:</strong>
                             {selectedLocation.category}
                         </p>
 
                         <p id="status">
-                            <strong>Status:</strong>{" "}
+                            <strong>Current status: </strong>{status}
                             {}
                         </p>
                         <section className="info-section">
@@ -85,10 +85,12 @@ function InfoPanel({ selectedLocation, isInfoOpen, setIsInfoOpen,setCurrentLocat
                         <button onClick={()=>{
                             setCurrentLocation(selectedLocation);
                             setToastActive(true);
-                            setToastContent("setcurrentlocation");
+                            setToastContent("currentlocation");
+                            localStorage.setItem("currentLocation",JSON.stringify(selectedLocation));
                         }
                         }>Set as Current Location</button>
-                        <button onClick={()=> handleNavigationUI() }>Navigate</button>
+                        <button onClick={()=> handleNavigationUI()}
+                            id="navigation-btn">Navigate</button>
                         
                     </>
                 )}
