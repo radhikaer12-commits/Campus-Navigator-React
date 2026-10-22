@@ -1222,24 +1222,25 @@ export const locations = [
     createHostel("marco-polo-hostel", "Marco Polo Hostel", "Boys and Girls", "/images/marco-polo-hostel.jpg"),
 
     // Food areas
-    createFoodOutlet("square-2", "Square-2"),
+    createFoodOutlet("square-2", "Square-2","/images/square-2.jpg"),
     createFoodOutlet("grab-go", "Grab & Go"),
     createFoodOutlet("belgian-waffel", "The Belgian Waffel"),
     createFoodOutlet("bev-cafe", "Bev Cafe"),
     createFoodOutlet("holy-scoop", "The Holy Scoop"),
     createFoodOutlet("first-coffee", "First Coffee"),
     createFoodOutlet("subway", "Subway"),
-    createFoodOutlet("doful", "Doful"),
+    createFoodOutlet("dohful", "Dohful","/images/dohful.jpg"),
     createFoodOutlet("amul", "Amul (under construction)"),
     createFoodOutlet("blue-tokai", "Blue Tokai"),
-    createFoodOutlet("chai-vyanjan", "Chai Vyanjan"),
+    createFoodOutlet("chai-vyanjan", "Chai Vyanjan","/images/cv.jpg"),
     createFoodOutlet("haveli", "The Haveli"),
-    createFoodOutlet("dhaba", "The Indian Dhaba"),
+    createFoodOutlet("wow-momos", "Wow-momos"),
      {
         id: 'square-1',
         name: 'Square 1',
         category: "food",
         type: "restaurant",
+        image:"/images/square-1.jpg",
 
         schedule: {
             weekdays: {
@@ -1289,15 +1290,15 @@ export const locations = [
     createParking("parking-tesla", "Car Parking"),
 
     // Sports Facilities
-    createGround("sports-area", "Sports Arena"),
+    createGround("sports-area", "Sports Arena", "/images/sports-arena.jpg"),
 
     // Grounds & Parks
     createGround("football-ground", "Football Ground"),
-    createGround("beta-zone", "Beta Zone"),
+    createGround("beta-zone", "Beta Zone","/images/beta.jpg"),
     createGround("chsf-park", "CHSF Park"),
     createGround("chitkara-woods", "Chitkara Woods"),
     createGround("chitkara-university", "Chitkara University"),
-    createGround("park-of-scluptures", "Park of Sculptures"),
+    createGround("park-of-scluptures", "Park of Sculptures", "/images/sculpture-park.jpg"),
     createGround("alpha-zone", "Alpha Zone"),
     createGround("omega-zone", "Omega Zone"),
     createGround("martin-fountain", "Martin Fountain"),
@@ -1365,12 +1366,13 @@ function createParking(id, name) {
     };
 }
 
-function createFoodOutlet(id, name) {
+function createFoodOutlet(id, name,image) {
     return {
         id,
         name,
         category: "food",
         type: "restaurant",
+        image,
 
         schedule: {
             weekdays: {
@@ -1397,10 +1399,11 @@ function createFoodOutlet(id, name) {
     };
 }
 
-function createGround(id, name) {
+function createGround(id, name, image) {
     return {
         id,
         name,
+        image,
 
         category: "ground",
         type: "ground",
