@@ -1207,19 +1207,19 @@ export const locations = [
         ]
     },
     // Hostels -- Girls
-    createHostel("pi-hostel", "Pi Hostel", "Girls"),
-    createHostel("IBN-hostel", "IBN Hostel", "Girls"),
-    createHostel("NGH-hostel", "NGH Hostel", "Girls"),
-    createHostel("vasco-hostel", "Vasco da Gama Hostel", "Girls"),
-    createHostel("columbus-hostel", "Columbus Hostel", "Girls"),
+    createHostel("pi-hostel", "Pi Hostel", "Girls","/images/pie-hostel.jpg"),
+    createHostel("IBN-hostel", "IBN Hostel", "Girls", "/images/ibn-hostel.jpg"),
+    createHostel("NGH-hostel", "NGH Hostel", "Girls", "/images/ngh-hostel.jpg"),
+    createHostel("vasco-hostel", "Vasco da Gama Hostel", "Girls", "/images/vasco-hostel.jpg"),
+    createHostel("columbus-hostel", "Columbus Hostel", "Girls", "/images/columbus-hostel.jpg"),
     // Hostel -- Boys
-    createHostel("armstrong-hostel", "Armstrong Hostel", "Boys"),
-    createHostel("archemedes-hostel", "Archemedes Hostel", "Boys"),
-    createHostel("aristotle-hostel", "Aristotle Hostel", "Boys"),
-    createHostel("alfred-nobel-hostel", "Alfred Nobel Hostel", "Boys"),
-    createHostel("franklin-hostel", "Franklin Hostel", "Boys"),
-    createHostel("magallen-hostel", "Magallen Hostel", "Boys"),
-    createHostel("marco-polo-hostel", "Marco Polo Hostel", "Boys and Girls"),
+    createHostel("armstrong-hostel", "Armstrong Hostel", "Boys","/images/armstrong-hostel.jpg"),
+    createHostel("archemedes-hostel", "Archemedes Hostel", "Boys", "/images/archimedes-hostel.jpg"),
+    createHostel("aristotle-hostel", "Aristotle Hostel", "Boys", "/images/aristotle-hostel.jpg"),
+    createHostel("alfred-nobel-hostel", "Alfred Nobel Hostel", "Boys", "/images/alfred-nobel-hostel.jpg"),
+    createHostel("franklin-hostel", "Franklin Hostel", "Boys", "/images/franklin-hostel.jpg"),
+    createHostel("magallen-hostel", "Magallen Hostel", "Boys", "/images/magellan-hostel.jpg"),
+    createHostel("marco-polo-hostel", "Marco Polo Hostel", "Boys and Girls", "/images/marco-polo-hostel.jpg"),
 
     // Food areas
     createFoodOutlet("square-2", "Square-2"),
@@ -1304,12 +1304,13 @@ export const locations = [
 
 ];
 
-function createHostel(id, name, gender) {
+function createHostel(id, name, gender, image) {
     return {
         id,
         name,
         category: "hostel",
         type: "building",
+        image,
 
         description: `${gender} student hostel providing residential accommodation.`,
 
