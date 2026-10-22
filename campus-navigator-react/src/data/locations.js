@@ -1011,6 +1011,7 @@ export const locations = [
         name: "Admission Block",
         category: "administration",
         type: "building",
+        image:"/images/admission.jpg",
 
         description: "Administrative building assisting prospective students with admissions, counselling, and enrollment procedures.",
 
@@ -1143,6 +1144,7 @@ export const locations = [
         name: "Sportorium",
         category: "miscellaneous",
         type: "building",
+        image:"/images/sportorium.jpg",
 
         description: "A multi-purpose sports facility offering indoor and outdoor recreational activities, fitness facilities and spaces for students to participate in sports and leisure activities.",
 
