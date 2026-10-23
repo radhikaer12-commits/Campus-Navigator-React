@@ -90,8 +90,8 @@
 
 <rect  id="picasso-block" class="location" x="303.293" y="125.682" width="36" height="31" fill="var(--academic) "/>
 <rect id="art-gallery" class="location" x="317.293" y="158.682" width="22" height="13" fill="var(--academic) "/>
-<rect id="happiness-center" class="location miscellaneous" x="317.293" y="174.682" width="22" height="13" fill="var(--academic) "/>
-<rect id="bloom-block" class="location" x="317.293" y="191.682" width="22" height="13" fill="var(--academic) "/>
+<rect id="bloom-block" class="location" x="317.293" y="174.682" width="22" height="13" fill="var(--academic) "/>
+<rect id="happiness-center" class="location miscellaneous" x="317.293" y="191.682" width="22" height="13" fill="var(--academic) "/>
 
 
 <rect id="library" class="location" x="514.293" y="331.682" width="9" height="8" fill="var(--academic) "/>

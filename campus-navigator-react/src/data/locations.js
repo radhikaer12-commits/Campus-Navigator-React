@@ -69,6 +69,7 @@ export const locations = [
         name: "Moon Hall",
         category: "academic",
         type: "building",
+        image:"/images/moon-hall.jpg",
         description: "",
         schedule: {
             weekdays: {
@@ -346,6 +347,7 @@ export const locations = [
         name: "Tesla Block",
         category: "academic",
         type: "building",
+        image:"/images/tesla.jpg",
         description: "Academic block containing classrooms, lecture halls, and faculty offices for the Department of Mechanical Engineering.",
         schedule: {
             weekdays: {
@@ -376,6 +378,7 @@ export const locations = [
         name: "Maritime School",
         category: "academic",
         type: "building",
+        image: "/images/tesla.jpg",
         description: "Maritime Studies School.",
         schedule: {
             weekdays: {
@@ -650,6 +653,7 @@ export const locations = [
         name: "Martin Extension",
         category: "academic",
         type: "building",
+        image: "/images/martin-extension.jpg",
 
         description: "Academic block supporting teaching, learning, and research activities.",
 
@@ -677,6 +681,7 @@ export const locations = [
         name: "Rockefeller Extension",
         category: "academic",
         type: "building",
+        image:"/images/rockfeller-extension.jpg",
 
 
 
@@ -841,6 +846,7 @@ export const locations = [
         name: "Apple Experience Centre",
         category: "miscellaneous",
         type: "building",
+        image:"/images/apple-store.jpg",
 
         description: "An interactive centre where students and visitors can explore and experience Apple products, devices, and technologies.",
 
@@ -1047,6 +1053,7 @@ export const locations = [
         name: "Chitkara Happiness Center",
         category: "miscellaneous",
         type: "building",
+        image:"/images/chitkara-happiness-centre.jpg",
 
         description: "Chitkara happiness center.",
 
@@ -1080,6 +1087,7 @@ export const locations = [
         name: "ATM",
         category: "miscellaneous",
         type: "building",
+        image:"/images/ATM.jpg",
 
         description: "HDFC Bank ATM",
 
@@ -1110,6 +1118,7 @@ export const locations = [
         name: "Beauty Lounge",
         category: "miscellaneous",
         type: "building",
+        image:"/images/beauty-lounge.jpg",
 
         description: "A convenient grooming facility providing personal care and styling services for students and staff.",
 
@@ -1182,6 +1191,7 @@ export const locations = [
         name: "Tuck Shop",
         category: "miscellaneous",
         type: "building",
+        image:"/images/tuck-shop.jpg",
 
         description: "A convenient campus shop offering everyday essentials for students and staff.",
 
@@ -1225,18 +1235,18 @@ export const locations = [
 
     // Food areas
     createFoodOutlet("square-2", "Square-2","/images/square-2.jpg"),
-    createFoodOutlet("grab-go", "Grab & Go"),
-    createFoodOutlet("belgian-waffel", "The Belgian Waffel"),
-    createFoodOutlet("bev-cafe", "Bev Cafe"),
-    createFoodOutlet("holy-scoop", "The Holy Scoop"),
-    createFoodOutlet("first-coffee", "First Coffee"),
-    createFoodOutlet("subway", "Subway"),
+    createFoodOutlet("grab-go", "Grab & Go","/images/grab&go.jpg"),
+    createFoodOutlet("belgian-waffel", "The Belgian Waffel","/images/belgian-waffle.jpg"),
+    createFoodOutlet("bev-cafe", "Bev Cafe","/images/bev-cafe.jpg"),
+    createFoodOutlet("holy-scoop", "The Holy Scoop","/images/holy-scoop.jpg"),
+    createFoodOutlet("first-coffee", "First Coffee","/images/first-coffee.jpg"),
+    createFoodOutlet("subway", "Subway","/images/subway.jpg"),
     createFoodOutlet("dohful", "Dohful","/images/dohful.jpg"),
     createFoodOutlet("amul", "Amul (under construction)"),
-    createFoodOutlet("blue-tokai", "Blue Tokai"),
+    createFoodOutlet("blue-tokai", "Blue Tokai","/images/blue-tokai.jpg"),
     createFoodOutlet("chai-vyanjan", "Chai Vyanjan","/images/cv.jpg"),
     createFoodOutlet("haveli", "The Haveli"),
-    createFoodOutlet("wow-momos", "Wow-momos"),
+    createFoodOutlet("wow-momos", "Wow-momos","/images/wow-momos.jpg"),
      {
         id: 'square-1',
         name: 'Square 1',
@@ -1282,28 +1292,28 @@ export const locations = [
 
     // Parkings
 
-    createParking("parking-chaivyanjan", "Car Parking"),
-    createParking("parking-maingate", "Car Parking"),
-    createParking("parking-turing", "Two-Wheeler Parking"),
-    createParking("parking-omega", "Parking"),
-    createParking("parking-bus", "Bus Parking"),
-    createParking("parking-chaivyanjan-left", "Car Parking"),
+    createParking("parking-chaivyanjan", "Car Parking","/images/cv-parking.jpg"),
+    createParking("parking-maingate", "Car Parking","/images/maingate-parking.jpg"),
+    createParking("parking-turing", "Two-Wheeler Parking","/images/turing-parking.jpg"),
+    createParking("parking-omega", "Parking","/images/omega-parking.jpg"),
+    createParking("parking-bus", "Bus Parking","/images/bus-parking.jpg"),
+    createParking("parking-chaivyanjan-left", "Car Parking", "/images/football-parking.jpg"),
     createParking("parking-chaivyanjan-car", "Car Parking"),
-    createParking("parking-tesla", "Car Parking"),
+    createParking("parking-tesla", "Car Parking","/images/exploratoriam-parking.jpg"),
 
     // Sports Facilities
     createGround("sports-area", "Sports Arena", "/images/sports-arena.jpg"),
 
     // Grounds & Parks
-    createGround("football-ground", "Football Ground"),
+    createGround("football-ground", "Football Ground","/images/football-ground.jpg"),
     createGround("beta-zone", "Beta Zone","/images/beta.jpg"),
-    createGround("chsf-park", "CHSF Park"),
-    createGround("chitkara-woods", "Chitkara Woods"),
-    createGround("chitkara-university", "Chitkara University"),
+    createGround("chsf-park", "CHSF Park","/images/chsf-park.jpg"),
+    createGround("chitkara-woods", "Chitkara Woods","/images/chitkara-woods.jpg"),
+    createGround("chitkara-university", "Chitkara University","/images/chitkara-park.jpg"),
     createGround("park-of-scluptures", "Park of Sculptures", "/images/sculpture-park.jpg"),
-    createGround("alpha-zone", "Alpha Zone"),
-    createGround("omega-zone", "Omega Zone"),
-    createGround("martin-fountain", "Martin Fountain"),
+    createGround("alpha-zone", "Alpha Zone","/images/alpha-zone.jpg"),
+    createGround("omega-zone", "Omega Zone","/images/omega-zone.jpg"),
+    createGround("martin-fountain", "Martin Fountain","/images/martin-fountain.jpg"),
 
 ];
 
@@ -1340,12 +1350,13 @@ function createHostel(id, name, gender, image) {
     };
 }
 
-function createParking(id, name) {
+function createParking(id, name,image) {
     return {
         id,
         name,
         category: "parking",
         type: "parking",
+        image,
 
         description: "Parking area for students, faculty, and visitors.",
         schedule: {
