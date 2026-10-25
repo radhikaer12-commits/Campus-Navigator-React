@@ -1,10 +1,17 @@
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import "./CampusLegend.css";
 
 function CampusLegend() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
+
+  const location = useLocation();
+  const feedbackRef = useRef(null);
+
+  const isFeedbackRoute =
+    location.pathname === "/campuslegend/feedback";
 
   const legendItems = [
     {
@@ -49,6 +56,15 @@ function CampusLegend() {
     }
   ];
 
+  useEffect(() => {
+    if (isFeedbackRoute && feedbackRef.current) {
+      feedbackRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }
+  }, [isFeedbackRoute]);
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -70,9 +86,7 @@ function CampusLegend() {
     <div className="campus-legend">
       <div className="legend-header">
         <h2>Campus Legend</h2>
-        <p>
-          Explore the different places around the campus.
-        </p>
+        <p>Explore the different places around the campus.</p>
       </div>
 
       <div className="legend-grid">
@@ -92,7 +106,6 @@ function CampusLegend() {
       {selectedCategory && (
         <div className="legend-details">
           <h3>{selectedCategory.title}</h3>
-
           <p>{selectedCategory.info}</p>
 
           <button
@@ -105,7 +118,12 @@ function CampusLegend() {
         </div>
       )}
 
-      <div className="legend-feedback">
+      <div
+        ref={feedbackRef}
+        id="campuslegend-feedback"
+        className={`legend-feedback ${isFeedbackRoute ? "feedback-highlight" : ""
+          }`}
+      >
         <h3>Missing a Location?</h3>
 
         <p>
