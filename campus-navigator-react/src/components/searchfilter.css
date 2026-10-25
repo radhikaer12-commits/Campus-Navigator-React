@@ -88,7 +88,7 @@
     display: none;
 }
 
-#search-results {
+#search-results,.recent-searches {
     position: absolute;
     top: 90px;
     left: 0;
@@ -101,6 +101,14 @@
     z-index: 100000000;
     color: var(--text-muted);
     border: 1px solid var(--border);
+}
+.recent-searches{
+    gap: 12px;
+    padding: 12px;
+}
+.recent-searches-header{
+    display: flex;
+    justify-content: space-between;
 }
 
 #search-results::-webkit-scrollbar {

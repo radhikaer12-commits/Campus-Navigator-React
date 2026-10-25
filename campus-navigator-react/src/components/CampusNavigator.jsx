@@ -392,10 +392,7 @@ function CampusNavigator() {
                             )}
 
                             {modalName === "about" && (
-                                <p>
-                                    Campus Navigator helps you explore
-                                    and navigate around Chitkara University.
-                                </p>
+                                <About/>
                             )}
                             {modalName === "howtouse" && (
                                 <HowToUse setTutorialActive={setTutorialActive} setModalOpen={setModalOpen} />

@@ -3,7 +3,7 @@
 .toast-overlay {
     position: fixed;
     inset: 0;
-    z-index: 10000;
+    z-index: 1000000;
     pointer-events: none;
 }
 

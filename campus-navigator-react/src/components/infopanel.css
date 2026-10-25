@@ -153,6 +153,49 @@
     font-size: 14px;
 }
 
+#current-location-set-btn,
+#navigation-btn {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text-accent);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+#current-location-set-btn:hover:not(:disabled),
+#navigation-btn:hover:not(:disabled) {
+    background: var(--map-surface);
+    color: var(--text-primary);
+    border-color: var(--text-accent);
+}
+
+#current-location-set-btn:active:not(:disabled),
+#navigation-btn:active:not(:disabled) {
+    background: var(--border);
+}
+
+#current-location-set-btn:focus-visible,
+#navigation-btn:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 3px;
+}
+
+#current-location-set-btn:disabled,
+#navigation-btn:disabled {
+    background: var(--map-surface);
+    color: var(--text-muted);
+    border-color: var(--border);
+    cursor: not-allowed;
+}
 @media (min-width: 1024px) {
     #info-panel {
         position: static;

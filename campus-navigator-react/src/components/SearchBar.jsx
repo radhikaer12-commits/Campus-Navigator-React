@@ -3,9 +3,9 @@ import { foodOutlets } from "../data/FoodOutlets";
 import { useState } from "react";
 import SearchFilters from "./SearchFilters";
 
-function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFood, setOnFood, setToastActive, setToastContent,isSearchBar,
+function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFood, setOnFood, setToastActive, setToastContent, isSearchBar,
     setSearchBar
- }) {
+}) {
     const query = search.trim().toLowerCase();
     let matches = [];
     const [recentSearches, setRecentSearches] = useState([]);
@@ -46,7 +46,6 @@ function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFo
             dateTime: new Date().toLocaleString("en-IN")
         };
 
-        // Remove an existing entry for the same location
         const updatedHistory = [
             newSearch,
             ...history.filter(item => item.id !== newSearch.id)
@@ -88,9 +87,16 @@ function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFo
                     <input type="search" id="search" placeholder={isFood ? "Search food..." : "Search buildings, labs, offices..."}
                         value={search}
                         onFocus={loadRecentSearches}
+                        onBlur={() => {
+                            setShowRecentSearches(false);
+                        }}
                         onChange={(event) => {
                             setSearch(event.target.value)
-                            setShowRecentSearches(false);
+                            if (event.target.value.trim() == '') {
+                                loadRecentSearches();
+                            } else {
+                                setShowRecentSearches(false);
+                            }
                         }}
 
                     />
@@ -114,10 +120,13 @@ function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFo
                         </button>
                     </div>
 
-                    {recentSearches.map((item) => (
+                    {recentSearches.filter((item) =>
+                        isFood ? item.category === 'food'
+                            : item.category !== 'food'
+                    ).map((item) => (
                         <div
                             key={item.id}
-                            className="recent-search-item"
+                            className="recent-searches-item"
                             onMouseDown={(event) => event.preventDefault()}
                             onClick={() => {
                                 const location = locations.find(
@@ -133,7 +142,7 @@ function SearchBar({ search, setSearch, setSelectedLocation, setIsInfoOpen, isFo
                             }}
                         >
                             <i className="fa-solid fa-clock-rotate-left"></i>
-                            <span>{item.name}</span>
+                            <span> {item.name}</span>
                         </div>
                     ))}
                 </div>

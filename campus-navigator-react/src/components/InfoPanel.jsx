@@ -87,8 +87,9 @@ function InfoPanel({ selectedLocation, isInfoOpen, setIsInfoOpen,setCurrentLocat
                             setToastActive(true);
                             setToastContent("currentlocation");
                             localStorage.setItem("currentLocation",JSON.stringify(selectedLocation));
-                        }
-                        }>Set as Current Location</button>
+    
+                        } 
+                        }  id="current-location-set-btn">Set as Current Location</button>
                         <button onClick={()=> handleNavigationUI()}
                             id="navigation-btn">Navigate</button>
                         
