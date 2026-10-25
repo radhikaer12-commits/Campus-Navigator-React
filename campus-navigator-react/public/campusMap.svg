@@ -47,7 +47,7 @@
 <rect id="holy-scoop" class="location food" x="406.293" y="432.682" width="14" height="9" fill="var(--food)"/>
 <rect id="belgian-waffel" class="location food" x="406.293" y="421.682" width="14" height="9" fill="var(--food)"/>
 <rect id="square-1" class="location food" x="428.293" y="402.682" width="50" height="50" fill="var(--food)"/>
-<rect id="doful" class="location food" x="497.293" y="414.682" width="8" height="16" fill="var(--food)"/>
+<rect id="dohful" class="location food" x="497.293" y="414.682" width="8" height="16" fill="var(--food)"/>
 <rect id="amul" class="location food" x="497.293" y="432.682" width="8" height="16" fill="var(--food)"/>
 <rect id="haveli" class="location food" x="399.293" y="467.682" width="15" height="16" fill="var(--food)"/>
 <rect id="first-coffee" class="location food" x="384.293" y="443.682" width="30" height="13" fill="var(--food)"/>

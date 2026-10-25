@@ -9,7 +9,8 @@ function Map({
     selectedLocation,
     selectedCategory,
     onLocationSelect,
-    setMenuOpen
+    setMenuOpen,
+    route=[]
 }) {
 
     const mapRef = useRef(null);
@@ -195,7 +196,49 @@ function Map({
 
     }, [selectedLocation]);
 
+    useEffect(() => {
+        if (!mapRef.current) return;
 
+        const svg = mapRef.current.querySelector("svg");
+        if (!svg) return;
+
+        // Draw a fresh route overlay above every road. Coloring the original
+        // segments in place let later SVG roads paint over them at crossings.
+        mapRef.current.querySelectorAll(".road.route-highlight, .road-segment.route-highlight")
+            .forEach(road => road.classList.remove("route-highlight"));
+        mapRef.current.querySelector("#navigation-route-overlay")?.remove();
+        const overlay = document.createElementNS("http://www.w3.org/2000/svg", "g");
+        overlay.id = "navigation-route-overlay";
+
+        const drawRouteSegment = d => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            line.setAttribute("class", "road route-highlight");
+            line.setAttribute("d", d);
+            line.setAttribute("fill", "none");
+            overlay.appendChild(line);
+        };
+
+        if (route.partialSegments?.length) {
+            route.partialSegments.forEach(({ start, end }) => {
+                drawRouteSegment(`M${start.x} ${start.y}L${end.x} ${end.y}`);
+            });
+        } else {
+            route.forEach(roadId => {
+                const road = mapRef.current.querySelector(`.road-segment[data-route-segment="${roadId}"]`);
+                if (road) drawRouteSegment(road.getAttribute("d"));
+            });
+        }
+
+        route.connectors?.forEach(({ start, end }) => {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            line.setAttribute("class", "road route-highlight");
+            line.setAttribute("d", `M${start.x} ${start.y}L${end.x} ${end.y}`);
+            line.setAttribute("fill", "none");
+            overlay.appendChild(line);
+        });
+
+        if (overlay.childNodes.length) svg.appendChild(overlay);
+    }, [route]);
 
     /*
      * Category filtering

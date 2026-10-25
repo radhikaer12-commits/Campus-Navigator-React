@@ -12,9 +12,10 @@ import MyLocation from "./MyLocation";
 import NavigationUI from "./NavigationUI";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { dijkstra } from "../utils/dijkstra";
-import { campusGraph } from "../data/campusGraph";
-import { estimatedTime } from "../utils/estimatedTime";
+// import { dijkstra } from "../utils/dijkstra";
+// import { campusGraph } from "../data/campusGraph";
+// import { estimatedTime } from "../utils/estimatedTime";
+import { findShortestRoute } from "../utils/findShortestRoute";
 import About from "./About";
 import HowToUse from "./HowToUse";
 import Toast from "./ui/Toast";
@@ -42,7 +43,7 @@ function CampusNavigator() {
     const [selectedCategory, setSelectedCategory] = useState("all");
 
     const [darkMode, setDarkMode] = useState(() => {
-        return localStorage.getItem("darkMode")
+        return localStorage.getItem("darkMode") === "true"
     });
 
     const [tutorialActive, setTutorialActive] = useState(false);
@@ -51,6 +52,18 @@ function CampusNavigator() {
         window.innerWidth >= 1024
     );
     const [filtersOpen, setFiltersOpen] = useState(false);
+
+    useEffect(() => {
+        const closeInfoPanelOnOutsideClick = event => {
+            const target = event.target;
+            if (target.closest?.("#info-panel") || target.closest?.(".location")) return;
+            setIsInfoOpen(false);
+        };
+
+        document.addEventListener("pointerdown", closeInfoPanelOnOutsideClick);
+        return () => document.removeEventListener("pointerdown", closeInfoPanelOnOutsideClick);
+    }, []);
+
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalName, setModalName] = useState("");
@@ -145,6 +158,10 @@ function CampusNavigator() {
     const [walkTime, setWalkTime] = useState(0);
 
     useEffect(() => {
+        setRoute([]);
+    }, [currentLocation, selectedLocation]);
+
+    useEffect(() => {
         if (!toastActive) return;
 
         const timeout = setTimeout(() => {
@@ -159,10 +176,24 @@ function CampusNavigator() {
             alert("Please set your Current Location.");
             return;
         }
+        if (!selectedLocation) {
+            alert("Please select a destination.");
+            return;
+        }
         if (currentLocation.id === selectedLocation.id) {
             alert(`You are already in ${currentLocation.name}.`);
             return;
         }
+
+
+        const svg = document.querySelector("#map-container svg");
+        const path = findShortestRoute(svg, currentLocation, selectedLocation);
+        if (!path || path.length === 0) {
+            alert("No route found between these locations.");
+            return;
+        }
+        setRoute(path);
+        setWalkTime(Math.round((path.weight ?? 0) * 0.1));
 
 
         document.querySelector(".navigationUI").classList.add("active");
@@ -171,22 +202,14 @@ function CampusNavigator() {
 
         setIsInfoOpen(false);
         setFiltersOpen(false);
-        const path = dijkstra(campusGraph, currentLocation.id, selectedLocation.id);
-        const time = estimatedTime(campusGraph, path);
-        setWalkTime(time);
         setMenuOpen(false);
-        if (!path || path.length === 0) {
-            alert("No route found between these locations.");
-            return;
-        }
-        // Highlight the road segments in the returned path.
-        highlightRoute(path);
     }
 
 
     function handleLocationSelect(location) {
 
         setSelectedLocation(location);
+        setRoute([]);
 
         setIsInfoOpen(true);
 
@@ -263,6 +286,8 @@ function CampusNavigator() {
                 <NavigationUI currentLocation={currentLocation} selectedLocation={selectedLocation}
                     walkTime={walkTime} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} filtersOpen={filtersOpen}
                     setFiltersOpen={setFiltersOpen}
+                    setRoute={setRoute}
+
                 />
             </div>
 
@@ -319,6 +344,7 @@ function CampusNavigator() {
                             currentLocation={
                                 currentLocation
                             }
+                            route={route}
                             setMenuOpen={setMenuOpen}
                             mapTheme={mapTheme}
                             setMapTheme={setMapTheme}
