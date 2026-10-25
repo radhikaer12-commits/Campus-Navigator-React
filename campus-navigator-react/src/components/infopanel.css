@@ -1,18 +1,31 @@
 
 /* Info Panel */
+
 #info-panel {
     position: fixed;
-    bottom: 0;
     left: 0;
     right: 0;
-    height: 100vh;
-
+    bottom: 0;
+    height: auto;
+    max-height: 85dvh;
     display: flex;
     flex-direction: column;
     gap: 0;
-
     z-index: 40;
+    pointer-events: none;
 }
+
+#info-toggle-btn,
+#info-content {
+    pointer-events: auto;
+}
+
+#info-content.open {
+    max-height: 65dvh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
 
 .info-tags span {
     color: var(--text-primary);

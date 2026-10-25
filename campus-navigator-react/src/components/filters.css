@@ -61,3 +61,29 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
 }
+
+
+
+@media (max-width: 600px) {
+    #filters-container {
+        position: relative;
+        max-width: calc(100vw - 24px);
+    }
+
+    #left-panel-container {
+        max-width: calc(100vw - 16px);
+        gap: 8px;
+    }
+}
+
+@media (max-width: 600px) {
+    #filters {
+        left: 8px;
+        right: 8px;
+        top: 50px;
+        width: auto;
+        max-width: calc(100vw - 16px);
+        max-height: 60dvh;
+        overflow-y: auto;
+    }
+}
