@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import Header from "./Header";
-// import Filters from "./Filters";
 import Map from "./Map";
 import InfoPanel from "./InfoPanel";
 import Modal from "./ui/Modal";
@@ -11,13 +10,11 @@ import RecentLocations from "./RecentLocations";
 import NavigationUI from "./NavigationUI";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-import { findShortestRoute } from "../utils/findShortestRoute";
-import About from "./About";
 import HowToUse from "./HowToUse";
 import Toast from "./ui/Toast";
 import LeftPanel from "./LeftPanel";
 import { saveNotification } from "../utils/getNotifications";
-import { locations } from "../data/locations";
+import { findShortestRoute } from "../utils/findShortestRoute";
 
 function CampusNavigator() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -28,7 +25,7 @@ function CampusNavigator() {
                 localStorage.getItem("recentLocations")
             ) || [];
 
-            return locations.find(loc => loc.id === recent[0]?.id) || null;
+            return recent.length > 0 ? recent[0] : null;
         } catch {
             return null;
         }
@@ -40,7 +37,7 @@ function CampusNavigator() {
     const [selectedCategory, setSelectedCategory] = useState("all");
 
     const [darkMode, setDarkMode] = useState(() => {
-        return localStorage.getItem("darkMode") === "true"
+        return localStorage.getItem("darkMode") === "true";
     });
 
     const [tutorialActive, setTutorialActive] = useState(false);
@@ -60,7 +57,6 @@ function CampusNavigator() {
         document.addEventListener("pointerdown", closeInfoPanelOnOutsideClick);
         return () => document.removeEventListener("pointerdown", closeInfoPanelOnOutsideClick);
     }, []);
-
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalName, setModalName] = useState("");
@@ -138,14 +134,10 @@ function CampusNavigator() {
 
 
     const [recentLocations, setRecentLocations] = useState(() => {
-      try {
-          const saved = JSON.parse(localStorage.getItem("recentLocations"));
-          return Array.isArray(saved) ? saved : [];
-      } catch {
-          return [];
-      }
+        return JSON.parse(
+            localStorage.getItem("recentLocations")
+        ) || [];
     });
-    
     const [currentLocation, setCurrentLocation] = useState(() => {
         try {
             return JSON.parse(
@@ -186,7 +178,6 @@ function CampusNavigator() {
             return;
         }
 
-
         const svg = document.querySelector("#map-container svg");
         const path = findShortestRoute(svg, currentLocation, selectedLocation);
         if (!path || path.length === 0) {
@@ -195,12 +186,9 @@ function CampusNavigator() {
         }
         setRoute(path);
         setWalkTime(Math.round((path.weight ?? 0) * 0.1));
-
-
         document.querySelector(".navigationUI").classList.add("active");
         document.querySelector("header").style.display = "none";
         document.querySelector("#current-location-container").style.display = "none";
-
         setIsInfoOpen(false);
         setFiltersOpen(false);
         setMenuOpen(false);
@@ -288,7 +276,6 @@ function CampusNavigator() {
                     walkTime={walkTime} isInfoOpen={isInfoOpen} setIsInfoOpen={setIsInfoOpen} filtersOpen={filtersOpen}
                     setFiltersOpen={setFiltersOpen}
                     setRoute={setRoute}
-
                 />
             </div>
 
