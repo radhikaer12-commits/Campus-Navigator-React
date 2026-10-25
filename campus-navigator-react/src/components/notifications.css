@@ -77,6 +77,16 @@
 #map-theme-btn,
 #left-panel-container #filters-toggle-btn,
 #notifications-toggle-btn {
+    box-sizing: border-box;
+    width: 78px;
+    height: 52px;
+    min-width: 78px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 52px;
     background-color: var(--surface);
     color: var(--text-secondary);
     border: 1px solid var(--border);

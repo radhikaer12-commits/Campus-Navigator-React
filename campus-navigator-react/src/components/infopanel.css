@@ -86,6 +86,13 @@
     color: var(--text-secondary);
 }
 
+#info-content button {
+    color: var(--surface);
+    background-color: var(--text-accent);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
 #info-description {
     color: var(--text-muted);
 }

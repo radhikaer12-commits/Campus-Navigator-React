@@ -23,7 +23,7 @@
     --health: #F0A7A7;
     --parking: #F1D36A;
     --parks: #9FD0A9;
-    --miscellaneous: #E6C35C;
+    --miscellaneous: rgb(183, 92, 27);
 
 
     /* =========================
@@ -49,7 +49,7 @@
     --health_stroke: #B86666;
     --parking_stroke: #B89B32;
     --parks_stroke: #5E9A6D;
-    --miscellaneous_stroke: #9E7D16;
+    --miscellaneous_stroke: #67420c;
 
 
     /* =========================
@@ -100,7 +100,7 @@
     --health: #874F4F;
     --parking: #8E792D;
     --parks: #477B55;
-    --miscellaneous: #927A29;
+    --miscellaneous: #824f0e;
 
 
     /* =========================
@@ -126,7 +126,7 @@
     --health_stroke: #C87878;
     --parking_stroke: #C5A943;
     --parks_stroke: #73B982;
-    --miscellaneous_stroke: #C3A43D;
+    --miscellaneous_stroke: #C18A63;
 
     --background_stroke: #638A5A;
     --paths_stroke: #7B817D;
@@ -172,7 +172,7 @@
     --health: #683B3B;
     --parking: #6B5A20;
     --parks: #285238;
-    --miscellaneous: #66521A;
+    --miscellaneous: #66491a;
 
 
     /* =========================
@@ -198,7 +198,7 @@
     --health_stroke: #F87171;
     --parking_stroke: #FACC15;
     --parks_stroke: #4ADE80;
-    --miscellaneous_stroke: #FBBF24;
+    --miscellaneous_stroke: #D49A72;
 
 
     /* =========================
@@ -247,7 +247,7 @@
     --health: #D7A6A0;
     --parking: #DEC779;
     --parks: #A9C39A;
-    --miscellaneous: #D1B65B;
+    --miscellaneous: #A8754F;
 
 
     /* =========================
@@ -273,7 +273,7 @@
     --health_stroke: #925F5A;
     --parking_stroke: #927A28;
     --parks_stroke: #58754A;
-    --miscellaneous_stroke: #856B20;
+    --miscellaneous_stroke: #66452F;
 
 
     /* =========================
@@ -323,7 +323,7 @@
     --health: #713F4A;
     --parking: #6A5A25;
     --parks: #275A47;
-    --miscellaneous: #685821;
+    --miscellaneous: #7e5611;
 
 
     /* =========================
@@ -349,7 +349,7 @@
     --health_stroke: #F28B9A;
     --parking_stroke: #F6D365;
     --parks_stroke: #68D391;
-    --miscellaneous_stroke: #F6C85F;
+    --miscellaneous_stroke: #80580c;
 
 
     /* =========================
@@ -645,6 +645,8 @@ nav button {
     z-index: 1000000;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
     background: var(--surface);
     padding: clamp(8px,1.5vw,12px);
     border-radius: 5px;
@@ -685,7 +687,8 @@ main {
 
 
 
-.road.route-highlight {
+.road.route-highlight,
+.road-segment.route-highlight{
     stroke: #FF8A00 !important;
     stroke-width: 10px !important;
     stroke-opacity: 1 !important;

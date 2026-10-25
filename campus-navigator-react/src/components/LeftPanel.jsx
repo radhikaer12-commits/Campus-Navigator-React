@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Filters from "./Filters";
 import MapThemePalette from "./MapThemePalette";
 import Notifications from "./Notifications";
@@ -9,6 +9,7 @@ export default function LeftPanel({ selectedCategory, setSelectedCategory, filte
 }) {
     const [mapThemeMenu, openMapThemeMenu] = useState(false);
     const [openNotifications, setNotificationsOpen] = useState(false);
+    const panelRef = useRef(null);
 
     const [notificationCount, setNotificationCount] = useState(
         () => getNotificationCount()
@@ -31,11 +32,48 @@ export default function LeftPanel({ selectedCategory, setSelectedCategory, filte
             );
         };
     }, []);
+
+    useEffect(() => {
+        const closePanelsOutside = event => {
+            if (panelRef.current?.contains(event.target)) return;
+            openMapThemeMenu(false);
+            setNotificationsOpen(false);
+            setFiltersOpen(false);
+        };
+
+        document.addEventListener("pointerdown", closePanelsOutside);
+        return () => document.removeEventListener("pointerdown", closePanelsOutside);
+    }, [setFiltersOpen]);
+
+    const toggleMapTheme = () => {
+        const nextOpen = !mapThemeMenu;
+        openMapThemeMenu(nextOpen);
+        if (nextOpen) {
+            setNotificationsOpen(false);
+            setFiltersOpen(false);
+        }
+    };
+
+    const toggleNotifications = () => {
+        const nextOpen = !openNotifications;
+        setNotificationsOpen(nextOpen);
+        if (nextOpen) {
+            openMapThemeMenu(false);
+            setFiltersOpen(false);
+        }
+    };
+
+    const toggleFilters = nextOpen => {
+        setFiltersOpen(nextOpen);
+        if (nextOpen) {
+            openMapThemeMenu(false);
+            setNotificationsOpen(false);
+        }
+    };
+
     return (
-        <div id='left-panel-container'>
-            <button id="map-theme-btn" onClick={() => {
-                openMapThemeMenu(prev => !prev);
-            }}>{!mapThemeMenu ? <i className="fa-solid fa-palette"></i> : <i className="fa-solid fa-xmark"></i>}</button>
+        <div id='left-panel-container' ref={panelRef}>
+            <button id="map-theme-btn" onClick={toggleMapTheme}>{!mapThemeMenu ? <i className="fa-solid fa-palette"></i> : <i className="fa-solid fa-xmark"></i>}</button>
 
             {
                 mapThemeMenu && (
@@ -44,9 +82,9 @@ export default function LeftPanel({ selectedCategory, setSelectedCategory, filte
                 )
             }
             <Filters selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory}
-                filtersOpen={filtersOpen} setFiltersOpen={setFiltersOpen} />
+                filtersOpen={filtersOpen} setFiltersOpen={toggleFilters} />
             <button id="notifications-toggle-btn"
-                onClick={() => setNotificationsOpen(prev => !prev)}
+                onClick={toggleNotifications}
             >{!openNotifications ? <i className="fa-solid fa-bell"></i> : <i className="fa-solid fa-xmark"></i>}
                 {notificationCount > 0 && !openNotifications && (
                     <span className="notification-badge">

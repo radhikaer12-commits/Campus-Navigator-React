@@ -879,40 +879,7 @@ export const locations = [
     },
     // Administrative
 
-    {
-        id: "chitkara-nurture-nest",
-        name: "Chitkara Nurture Nest",
-        category: "miscellaneous",
-        type: "building",
-        image: "/images/nurture-nest.jpg",
-
-        description: "A dedicated campus facility providing a comfortable and supportive space for parents and young children.",
-
-        schedule: {
-            weekdays: {
-                open: "09:00",
-                close: "17:30"
-            },
-            weekends: {
-                closed: true
-            }
-        },
-
-        access: [
-            "Students",
-            "Faculty",
-            "Staff",
-            "Visitors"
-        ],
-
-        facilities: [
-            "Child Care Area",
-            "Nursing Room",
-            "Seating Area",
-            "Rest Area",
-            "Washrooms"
-        ]
-    },
+    
     {
         id: "babbage-block",
         name: "Babbage Block",
@@ -982,6 +949,7 @@ export const locations = [
             "Washrooms"
         ]
     },
+    // health
     {
         id: "health-care",
         name: "Health Care",
@@ -1011,6 +979,40 @@ export const locations = [
             "Sitting Area",
         ]
 
+    },
+    {
+        id: "chitkara-nurture-nest",
+        name: "Chitkara Nurture Nest",
+        category: "health",
+        type: "building",
+        image: "/images/nurture-nest.jpg",
+
+        description: "A dedicated campus facility providing a comfortable and supportive space for parents and young children.",
+
+        schedule: {
+            weekdays: {
+                open: "09:00",
+                close: "17:30"
+            },
+            weekends: {
+                closed: true
+            }
+        },
+
+        access: [
+            "Students",
+            "Faculty",
+            "Staff",
+            "Visitors"
+        ],
+
+        facilities: [
+            "Child Care Area",
+            "Nursing Room",
+            "Seating Area",
+            "Rest Area",
+            "Washrooms"
+        ]
     },
     {
         id: "admission-block",
@@ -1046,6 +1048,26 @@ export const locations = [
             "Waiting Area"
         ]
     },
+    {
+        id: "maingate-entry-block",
+        name: "Main Gate Entry Block",
+        category: "administration",
+        type: "building",
+        image:"/images/left-admission-block.jpg",
+        description: "Entry block at the campus main gate and waiting room for parents.",
+        schedule: {
+            weekdays: {
+                open: "09:00",
+                close: "17:00"
+            },
+            weekends: {
+                closed: true
+            }
+        },
+        access: ["Students", "Faculty", "Staff", "Visitors"],
+        facilities: ["Main Gate Entry"]
+    },
+    
     // Miscellaneous..
 
     {

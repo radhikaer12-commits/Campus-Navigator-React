@@ -1,4 +1,4 @@
-export default function ({ currentLocation, selectedLocation, walkTime,isInfoOpen,setIsInfoOpen,filtersOpen,setFiltersOpen, setRoute}) {
+export default function ({ currentLocation, selectedLocation, walkTime,isInfoOpen,setIsInfoOpen,filtersOpen,setFiltersOpen,setRoute}) {
   const onExit = () => {
     setRoute([]);
     document.querySelector(".navigationUI").classList.remove('active');

@@ -1,26 +1,23 @@
 import { useEffect, useState } from "react";
 
 import Header from "./Header";
-import Filters from "./Filters";
+// import Filters from "./Filters";
 import Map from "./Map";
 import InfoPanel from "./InfoPanel";
 import Modal from "./ui/Modal";
 import CampusLegend from "./CampusLegend";
 import Tutorial from "./Tutorial";
 import RecentLocations from "./RecentLocations";
-import MyLocation from "./MyLocation";
 import NavigationUI from "./NavigationUI";
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
-// import { dijkstra } from "../utils/dijkstra";
-// import { campusGraph } from "../data/campusGraph";
-// import { estimatedTime } from "../utils/estimatedTime";
 import { findShortestRoute } from "../utils/findShortestRoute";
 import About from "./About";
 import HowToUse from "./HowToUse";
 import Toast from "./ui/Toast";
 import LeftPanel from "./LeftPanel";
 import { saveNotification } from "../utils/getNotifications";
+import { locations } from "../data/locations";
 
 function CampusNavigator() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -31,7 +28,7 @@ function CampusNavigator() {
                 localStorage.getItem("recentLocations")
             ) || [];
 
-            return recent.length > 0 ? recent[0] : null;
+            return locations.find(loc => loc.id === recent[0]?.id) || null;
         } catch {
             return null;
         }
@@ -141,10 +138,14 @@ function CampusNavigator() {
 
 
     const [recentLocations, setRecentLocations] = useState(() => {
-        return JSON.parse(
-            localStorage.getItem("recentLocations")
-        ) || [];
+      try {
+          const saved = JSON.parse(localStorage.getItem("recentLocations"));
+          return Array.isArray(saved) ? saved : [];
+      } catch {
+          return [];
+      }
     });
+    
     const [currentLocation, setCurrentLocation] = useState(() => {
         try {
             return JSON.parse(
