@@ -172,11 +172,8 @@
 
     border: 1px solid var(--heading, #333333);
     border-radius: 8px;
-
-    /* Fallback colors ensure visibility in light mode */
-    background-color: var(--heading, #333333);
-    color: var(--text-on-dark, #ffffff);
-
+    background: var(--heading);
+    color: var(--text-on-dark);
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
