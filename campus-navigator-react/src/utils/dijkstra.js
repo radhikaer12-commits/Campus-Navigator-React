@@ -1,94 +1,94 @@
-export function dijkstra(graph, start, end) {
+// export function dijkstra(graph, start, end) {
 
-    const distances = {};
-    const previous = {};
-    const unvisited = new Set(Object.keys(graph));
+//     const distances = {};
+//     const previous = {};
+//     const unvisited = new Set(Object.keys(graph));
 
-    // 1. Initialize
-    for (const node of unvisited) {
-        distances[node] = Infinity;
-        previous[node] = null;
-    }
+//     // 1. Initialize
+//     for (const node of unvisited) {
+//         distances[node] = Infinity;
+//         previous[node] = null;
+//     }
 
-    // Starting point has distance 0
-    distances[start] = 0;
-
-
-    // 2. Keep processing nodes
-    while (unvisited.size > 0) {
-
-        // Find closest unvisited node
-        let current = null;
-
-        for (const node of unvisited) {
-
-            if (
-                current === null ||
-                distances[node] < distances[current]
-            ) {
-                current = node;
-            }
-        }
+//     // Starting point has distance 0
+//     distances[start] = 0;
 
 
-        // No path exists
-        if (
-            current === null ||
-            distances[current] === Infinity
-        ) {
-            return [];
-        }
+//     // 2. Keep processing nodes
+//     while (unvisited.size > 0) {
+
+//         // Find closest unvisited node
+//         let current = null;
+
+//         for (const node of unvisited) {
+
+//             if (
+//                 current === null ||
+//                 distances[node] < distances[current]
+//             ) {
+//                 current = node;
+//             }
+//         }
 
 
-        // Destination reached
-        if (current === end) {
-            break;
-        }
+//         // No path exists
+//         if (
+//             current === null ||
+//             distances[current] === Infinity
+//         ) {
+//             return [];
+//         }
 
 
-        // Mark current as visited
-        unvisited.delete(current);
+//         // Destination reached
+//         if (current === end) {
+//             break;
+//         }
 
 
-        // 3. Check all neighbours
-        for (const [neighbor, weight] of Object.entries(
-            graph[current]
-        )) {
-
-            const newDistance =
-                distances[current] + weight;
+//         // Mark current as visited
+//         unvisited.delete(current);
 
 
-            // Found a shorter path
-            if (newDistance < distances[neighbor]) {
+//         // 3. Check all neighbours
+//         for (const [neighbor, weight] of Object.entries(
+//             graph[current]
+//         )) {
 
-                distances[neighbor] = newDistance;
-
-                previous[neighbor] = current;
-            }
-        }
-    }
+//             const newDistance =
+//                 distances[current] + weight;
 
 
-    // 4. Build the path backwards
-    const path = [];
+//             // Found a shorter path
+//             if (newDistance < distances[neighbor]) {
 
-    let current = end;
+//                 distances[neighbor] = newDistance;
 
-    while (current !== null) {
-
-        path.unshift(current);
-
-        current = previous[current];
-    }
+//                 previous[neighbor] = current;
+//             }
+//         }
+//     }
 
 
-    // No valid path
-    if (path[0] !== start) {
-        return [];
-    }
+//     // 4. Build the path backwards
+//     const path = [];
+
+//     let current = end;
+
+//     while (current !== null) {
+
+//         path.unshift(current);
+
+//         current = previous[current];
+//     }
 
 
-    // Return only roads
-    return path;
-}
+//     // No valid path
+//     if (path[0] !== start) {
+//         return [];
+//     }
+
+
+//     // Return only roads
+//     return path;
+// }

@@ -1,4 +1,4 @@
-import { dijkstra } from "../utils/dijkstra";
+// import { dijkstra } from "../utils/dijkstra";
 import { getCurrentStatus } from "../utils/status";
 
 function InfoPanel({ selectedLocation, isInfoOpen, setIsInfoOpen,setCurrentLocation, handleNavigationUI,setToastActive,setToastContent }) {
