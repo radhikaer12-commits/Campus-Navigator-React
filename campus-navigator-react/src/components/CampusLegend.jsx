@@ -7,6 +7,11 @@ function CampusLegend() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
   const location = useLocation();
   const feedbackRef = useRef(null);
 
@@ -68,18 +73,36 @@ function CampusLegend() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.currentTarget);
+    setError("");
+    setFeedbackSubmitted(false);
+
+    if (!name.trim() || !email.trim() || !message.trim()) {
+      setError("All fields are required.");
+      return;
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (message.trim().length < 5) {
+      setError("Feedback must contain at least 5 characters.");
+      return;
+    }
 
     const feedback = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message")
+      name: name.trim(),
+      email: email.trim(),
+      message: message.trim()
     };
 
     console.log("Campus Feedback:", feedback);
 
     setFeedbackSubmitted(true);
-    event.currentTarget.reset();
+    setName("");
+    setEmail("");
+    setMessage("");
   }
 
   return (
@@ -125,29 +148,28 @@ function CampusLegend() {
           }`}
       >
         <h3>Missing a Location?</h3>
-
         <p>
-          Tell us about a missing location or share your
-          feedback to help improve the campus map.
+          Tell us about a missing location or share your feedback
+          to help improve the campus map.
         </p>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           <label htmlFor="feedback-name">Name</label>
           <input
             type="text"
             id="feedback-name"
-            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             placeholder="Enter your name"
-            required
           />
 
           <label htmlFor="feedback-email">Email</label>
           <input
-            type="email"
+            type="text"
             id="feedback-email"
-            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter your email"
-            required
           />
 
           <label htmlFor="feedback-message">
@@ -155,19 +177,24 @@ function CampusLegend() {
           </label>
           <textarea
             id="feedback-message"
-            name="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             placeholder="Enter the location name or your feedback"
             rows="4"
-            minLength={5}
-            required
           />
+
+          {error && (
+            <p className="feedback-error" role="alert">
+              {error}
+            </p>
+          )}
 
           <button type="submit" className="feedback-submit">
             Submit Feedback
           </button>
 
           {feedbackSubmitted && (
-            <p className="feedback-success">
+            <p className="feedback-success" role="status">
               Thank you! Your feedback has been noted.
             </p>
           )}

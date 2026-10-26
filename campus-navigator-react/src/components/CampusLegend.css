@@ -161,32 +161,46 @@
     outline-offset: 1px;
 }
 
-.feedback-submit {
+/* Submit Feedback button */
+.legend-feedback .feedback-submit {
     display: block;
     width: 100%;
     min-height: 44px;
     margin-top: 8px;
     padding: 12px 16px;
-    border: 1px solid var(--heading);
+    box-sizing: border-box;
+
+    border: 1px solid var(--heading, #333333);
     border-radius: 8px;
-<<<<<<< Updated upstream
-    background-color: var(--map-surface);
-    color: var(--text-primary);
-=======
-    background: var(--heading);
-    color: var(--text-on-dark);
->>>>>>> Stashed changes
+
+    /* Fallback colors ensure visibility in light mode */
+    background-color: var(--heading, #333333);
+    color: var(--text-on-dark, #ffffff);
+
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
+    text-align: center;
     cursor: pointer;
-    transition: background-color 0.2s ease,
-                color 0.2s ease,
-                border-color 0.2s ease;
+    opacity: 1;
+
+    transition: opacity 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
-.feedback-submit:hover {
-    opacity: 0.9;
+.legend-feedback .feedback-submit:hover {
+    opacity: 0.85;
+}
+
+.legend-feedback .feedback-submit:focus-visible {
+    outline: 2px solid var(--text-muted, #666666);
+    outline-offset: 3px;
+}
+
+.legend-feedback .feedback-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .legend-feedback .feedback-success {
@@ -195,6 +209,17 @@
     font-size: 14px;
 }
 
+/* Feedback section highlight */
+.feedback-highlight {
+    border: 2px solid #4f46e5;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+    transition: all 0.3s ease;
+    scroll-margin-top: 24px;
+}
+
+/* Mobile responsive layout */
 @media (max-width: 600px) {
     .campus-legend {
         max-height: 85vh;
@@ -213,13 +238,20 @@
     .legend-header h2 {
         font-size: 21px;
     }
+
+    .feedback-highlight {
+        padding: 14px;
+    }
 }
 
-.feedback-highlight {
-    border: 2px solid #4f46e5;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
-    transition: all 0.3s ease;
-    scroll-margin-top: 24px;
+.feedback-error {
+    color: #dc2626;
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.feedback-success {
+    color: #16a34a;
+    font-size: 14px;
+    margin-top: 10px;
 }
