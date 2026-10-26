@@ -471,18 +471,24 @@ button {
     padding: 0;
     box-sizing: border-box;
 }
-html{
-    overflow: hidden;
+
+html {
+    min-height: 100%;
+    overflow-x: clip;
 }
 
 body {
-    /* height: 100vh; */
+    min-height: 100vh;
+    min-height: 100dvh;
     font-family: system-ui, sans-serif;
     display: flex;
     flex-direction: column;
     background-color: var(--surface);
-    overflow: hidden;
+    color: var(--text-primary);
+    overflow-x: clip;
+    overflow-y: auto;
 }
+
 
 
 button {
@@ -525,27 +531,43 @@ nav button:hover {
 
 /* Campus navigatorr.. */
 
+
 nav {
-        width: 100vw;
-        /* width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        min-height: 56px;  */
-        /* padding: 8px 12px;  */
-        display: flex;
-        align-items: center;  
-        justify-content: space-between;
-        gap: 8px;
-        flex-wrap:nowrap;
-        overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 56px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+    overflow: visible;
 }
+
 nav > * {
-        min-width: 0;
-        flex-shrink: 0;
+    min-width: 0;
 }
-nav button {
-    flex-shrink: 0;
+
+#nav-title {
+    flex: 0 0 auto;
 }
+
+#search-wrapper {
+    flex: 1 1 240px;
+    min-width: 0;
+}
+
+#search-wrapper input {
+    width: 100%;
+    min-width: 0;
+}
+
+#menu-btn {
+    flex: 0 0 auto;
+}
+
 
 .location {
     transition:
@@ -653,17 +675,23 @@ nav button {
 }
 
 
+
 main {
     position: relative;
     display: flex;
     flex-direction: column;
-    /* overflow-y:hidden; */
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    flex: 1;
 }
 
-/* map */
 .map-section {
+    position: relative;
     width: 100%;
     height: 100%;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -672,18 +700,35 @@ main {
 
 #map-container {
     width: 100%;
-    height: 100%;   
+    height: 100%;
+    min-width: 0;
+    min-height: 0;
     overflow: hidden;
 }
 
-
 #map-container svg {
+    display: block;
+    width: 100%;
     height: 100%;
     border: 2px solid var(--border);
     padding: 0;
     box-sizing: border-box;
 }
 
+/* These must work on mobile too, not only desktop */
+.react-transform-wrapper {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0;
+    min-height: 0;
+}
+
+.react-transform-component {
+    width: 100% !important;
+    height: 100% !important;
+    min-width: 0;
+    min-height: 0;
+}
 
 
 
@@ -761,35 +806,27 @@ main {
     }
 }
 
-/* Desktops */
-@media (min-width:1024px) {
-
+/* Desktop layout */
+@media (min-width: 1024px) {
     main {
-        position: static;
-        display: flex;
         flex-direction: row;
         width: 100%;
-        height: calc(100vh - 120px);
+        height: calc(100dvh - 120px);
+        min-height: 0;
+        flex: none;
         overflow: hidden;
     }
 
     .map-section {
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .react-transform-wrapper {
         flex: 1;
-        width: 100%;
-        height: 100%;
-        min-width: 0;
     }
 
+    .react-transform-wrapper,
     .react-transform-component {
-        width: 100%;
-        height: 100%;
+        flex: 1;
+        width: 100% !important;
+        height: 100% !important;
+        min-width: 0;
+        min-height: 0;
     }
-
 }
