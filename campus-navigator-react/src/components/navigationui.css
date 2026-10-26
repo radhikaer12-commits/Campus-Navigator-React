@@ -7,37 +7,42 @@
 }
 
 /* Current location */
-
 #navigation-current-loc {
     color: var(--text-secondary);
-    background: var(--card-bg, var(--surface));
+    background: var(--surface);
     border: 1px solid var(--border);
 }
 
 /* Destination */
-
 #navigation-destination-loc {
     color: var(--heading);
-    background: var(--card-bg, var(--surface));
+    background: var(--surface);
     border: 1px solid var(--border);
     font-weight: 600;
 }
 
 /* Route indicator between locations */
-
 .navigationUI > div:first-of-type {
     color: var(--text-accent);
 }
 
-/* Bottom content area */
+.navigation-route-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    padding: 0 12px;
+    font-size: 24px;
+    line-height: 1;
+}
 
+/* Bottom content area */
 #navigation-content {
     background: var(--surface);
     border-top: 1px solid var(--border);
 }
 
 /* Estimated walking time */
-
 #navigation-estimated-time {
     color: var(--text-secondary);
 }
@@ -48,7 +53,6 @@
 }
 
 /* Exit button */
-
 #navigation-exit-btn {
     background: var(--heading);
     color: var(--text-on-dark);

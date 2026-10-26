@@ -1,10 +1,6 @@
-import React from 'react'
-import { estimatedTime } from '../utils/estimatedTime';
-import { campusGraph } from '../data/campusGraph';
-import { dijkstra } from '../utils/dijkstra';
-
-export default function ({ currentLocation, selectedLocation, walkTime,isInfoOpen,setIsInfoOpen,filtersOpen,setFiltersOpen}) {
+export default function ({ currentLocation, selectedLocation, walkTime,isInfoOpen,setIsInfoOpen,filtersOpen,setFiltersOpen,setRoute}) {
   const onExit = () => {
+    setRoute([]);
     document.querySelector(".navigationUI").classList.remove('active');
     document.querySelector("#search-wrapper").classList.remove('hidden');
     setIsInfoOpen(!isInfoOpen);
@@ -16,7 +12,7 @@ export default function ({ currentLocation, selectedLocation, walkTime,isInfoOpe
   return (
     <div className='navigationUI'>
       <p id="navigation-current-loc">{currentLocation?.name}</p>
-      <div>..........</div>
+      <div className="navigation-route-arrow" role="img" aria-label="toward destination">→</div>
       <p id="navigation-destination-loc">{selectedLocation?.name}</p>
       <div id="navigation-content">
         <button onClick={() => onExit()} id="navigation-exit-btn">Exit</button>

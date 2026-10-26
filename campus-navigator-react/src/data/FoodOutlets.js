@@ -215,22 +215,11 @@ export const foodOutlets = [
     },
 
     {
-        id: "dhaba",
-        name: "The Indian Dhaba",
-        locationId: "dhaba",
+        id: "wow-momos",
+        name: "Wow Momos",
+        locationId: "wow-momos",
         ucampusUrl: "",
-        menu: [
-            { name: "Tea", price: 20 },
-            { name: "Masala Tea", price: 25 },
-            { name: "Chole Bhature", price: 100 },
-            { name: "Rajma Rice", price: 90 },
-            { name: "Dal Rice", price: 80 },
-            { name: "Paneer Paratha", price: 80 },
-            { name: "Aloo Paratha", price: 60 },
-            { name: "Paneer Thali", price: 160 },
-            { name: "Veg Thali", price: 130 },
-            { name: "Lassi", price: 60 }
-        ]
+        menu: []
     }
 
 ];

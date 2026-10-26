@@ -1,10 +1,14 @@
 import React from "react";
 
 export default function HowToUse({ setTutorialActive, setModalOpen }) {
+    const handleTutorial = ()=>{
+        setTutorialActive(true);
+        setModalOpen(false);
+    }
     return (
         <div className="how-to-use">
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-magnifying-glass"></i>
                     {" "}Search
@@ -16,7 +20,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-map"></i>
                     {" "}Explore the Map
@@ -28,7 +32,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-tags"></i>
                     {" "}Filter Locations
@@ -40,7 +44,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-route"></i>
                     {" "}Navigate
@@ -52,7 +56,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-magnifying-glass-plus"></i>
                     {" "}Zoom &amp; Pan
@@ -64,7 +68,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-location-dot"></i>
                     {" "}Recent Locations
@@ -76,7 +80,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-section">
+            <div className="how-to-section" onClick={handleTutorial}>
                 <h3>
                     <i className="fa-solid fa-palette"></i>
                     {" "}Theme
@@ -88,7 +92,7 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
             </div>
 
-            <div className="how-to-tip">
+            <div className="how-to-tip" onClick={handleTutorial}>
                 <strong>
                     <i className="fa-solid fa-lightbulb"></i>
                     {" "}Tip
@@ -107,13 +111,10 @@ export default function HowToUse({ setTutorialActive, setModalOpen }) {
                 </p>
 
                 <button
-                    onClick={() => {
-                        setTutorialActive(true);
-                        setModalOpen(false);
-                    }}
+                    onClick={handleTutorial}
                 >
                     <i className="fa-solid fa-circle-play"></i>
-                    <span> Start Tutorial</span>
+                    <span id='tutorial-start-span'> Start Tutorial</span>
                 </button>
             </div>
 

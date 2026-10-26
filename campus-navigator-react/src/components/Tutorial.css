@@ -1,3 +1,4 @@
+
 /* ========================================
    TUTORIAL OVERLAY
 ======================================== */
@@ -5,14 +6,13 @@
 #tutorial-overlay {
     position: fixed;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     z-index: 9999;
-
     background: rgba(0, 0, 0, 0.55);
+}
 
+#tutorial-overlay ~ * {
     pointer-events: none;
 }
 
@@ -23,19 +23,15 @@
 
 .tutorial-highlight {
     position: fixed;
-
     border: 2px solid var(--border);
-    border-radius: 8px;
-
     background: transparent;
 
     box-shadow:
-        0 0 0 3px rgba(255, 255, 255, 0.25),
-        0 0 12px rgba(255, 255, 255, 0.9),
-        0 0 25px rgba(255, 255, 255, 0.5);
+        0 0 0 3px var(--map-surface),
+        0 0 12px var(--text-on-dark),
+        0 0 25px var(--border);
 
     pointer-events: none;
-
     z-index: 10000;
 
     transition:
@@ -45,6 +41,10 @@
         height 0.3s ease;
 }
 
+.tutorial-highlight #tutorial-highlight-overlay {
+    background: var(--surface);
+}
+
 
 /* ========================================
    TOOLTIP
@@ -52,37 +52,27 @@
 
 .tutorial-tooltip {
     position: fixed;
-
     z-index: 10001;
-
     width: min(360px, calc(100vw - 30px));
-
     padding: 18px;
 
-    background: var(--surface, white);
-    color: var(--text-primary, #222);
-
+    background: var(--surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
     border-radius: 14px;
 
     line-height: 1.5;
-
     text-align: left;
 
     box-shadow:
         0 3px 10px rgba(0, 0, 0, 0.2),
         0 6px 20px rgba(0, 0, 0, 0.15);
 
-    /*
-       IMPORTANT:
-       The overlay is pointer-events:none,
-       so enable pointer events specifically
-       on the tooltip/buttons.
-    */
+    /* Enable interaction with the tooltip and its buttons */
     pointer-events: auto;
 
     left: 50%;
     bottom: 30px;
-
     transform: translateX(-50%);
 
     animation: tutorialTooltipIn 0.3s ease;
@@ -95,11 +85,10 @@
 
 .tutorial-step-count {
     margin-bottom: 6px;
-
     font-size: 0.75rem;
     font-weight: 600;
-
-    opacity: 0.6;
+    color: var(--text-muted);
+    opacity: 0.8;
 }
 
 
@@ -109,9 +98,9 @@
 
 .tutorial-tooltip h3 {
     margin: 0 0 8px;
-
     font-size: 1rem;
     font-weight: 600;
+    color: var(--heading);
 }
 
 
@@ -121,10 +110,9 @@
 
 .tutorial-tooltip p {
     margin: 0;
-
     font-size: 0.85rem;
-
     line-height: 1.5;
+    color: var(--text-secondary);
 }
 
 
@@ -134,12 +122,9 @@
 
 .tutorial-controls {
     display: flex;
-
     justify-content: flex-end;
     align-items: center;
-
     gap: 10px;
-
     margin-top: 16px;
 }
 
@@ -150,13 +135,11 @@
 
 .tutorial-controls button {
     padding: 8px 16px;
-
-    border: none;
+    border: 1px solid var(--border);
     border-radius: 8px;
 
     font-size: 0.85rem;
     font-weight: 500;
-
     cursor: pointer;
 
     transition:
@@ -176,20 +159,32 @@
     color: var(--text-primary);
 }
 
+.tutorial-back-btn:hover {
+    background: var(--border);
+}
+
 
 /* NEXT */
 
 .tutorial-next-btn {
-    background: var(--accent);
-    color: white;
+    background: var(--text-accent);
+    color: var(--text-on-dark);
+}
+
+.tutorial-next-btn:hover {
+    opacity: 0.9;
 }
 
 
 /* FINISH */
 
 .tutorial-finish-btn {
-    background: var(--accent);
-    color: white;
+    background: var(--heading);
+    color: var(--text-on-dark);
+}
+
+.tutorial-finish-btn:hover {
+    opacity: 0.9;
 }
 
 
@@ -215,10 +210,8 @@
 ======================================== */
 
 @media (min-width: 601px) {
-
     .tutorial-tooltip {
         width: min(400px, calc(100vw - 40px));
-
         padding: 20px;
     }
 
@@ -237,10 +230,8 @@
 ======================================== */
 
 @media (min-width: 1024px) {
-
     .tutorial-tooltip {
         width: 400px;
-
         bottom: 40px;
     }
 

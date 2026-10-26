@@ -1,0 +1,101 @@
+
+#notification-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    left: 100px;
+    backdrop-filter: blur(12px);
+    height: 500px;
+    width: 320px;
+    /* max-height: 100%; */
+    padding: 12px;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+#notification-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: clamp(8px,1.5vw,12px);
+    background-color: var(--surface);
+    color: var(--heading);
+}
+
+#notification-content {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#notification-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+#notification-content::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 10px;
+}
+
+#notification-content::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 10px;
+}
+
+#notification-content::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+#notification-content div {
+    display: flex;
+    padding: clamp(8px,1.5vw,12px);
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: var(--map-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#notification-header button {
+    background-color: var(--surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+}
+
+
+
+#notification-header button:hover:not(:disabled) {
+    background-color: var(--map-surface);
+    color: var(--text-primary);
+    border-color: var(--text-accent);
+}
+
+#map-theme-btn,
+#left-panel-container #filters-toggle-btn,
+#notifications-toggle-btn {
+    box-sizing: border-box;
+    width: 78px;
+    height: 52px;
+    min-width: 78px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex: 0 0 52px;
+    background-color: var(--surface);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+#map-theme-btn:hover,
+#left-panel-container #filters-toggle-btn:hover,
+#notifications-toggle-btn:hover {
+    background-color: var(--map-surface);
+    color: var(--text-primary);
+    border-color: var(--text-accent);
+}

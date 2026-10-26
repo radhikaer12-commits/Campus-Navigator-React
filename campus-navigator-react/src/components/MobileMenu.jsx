@@ -11,7 +11,7 @@ function MobileMenu({menuOpen,onHowToUse,onTheme,darkMode,onAbout,onRecent,onLeg
         className={menuOpen ? "open" : ""}>
             <button onClick={onHomeClick}>Home</button>
             <button onClick={onHowToUse}>How to Use</button>
-            <button onClick={onRecent}>Recent Locations</button>
+            <button onClick={onRecent} id='recent-locations-btn'>Recent Locations</button>
             <button onClick={onLegend}>Campus Legend</button>
             <button onClick={onTheme}>{darkMode ? "Light Mode" : "Dark Mode"}</button>
             <button onClick={onAbout} id="about-btn">About</button>
