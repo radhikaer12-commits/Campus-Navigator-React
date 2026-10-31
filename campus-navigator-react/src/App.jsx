@@ -13,9 +13,10 @@ import "./components/filters.css";
 import "./components/infopanel.css";
 import "./components/ui/toast.css";
 import "./components/ui/modal.css";
-import "./components/mobilemenu.css";
+// import "./components/mobilemenu.css";
 import "./components/notifications.css";
 import "./components/recentlocations.css";
+import Error from "./components/ui/Error";
 
 function App() {
 
@@ -32,6 +33,11 @@ function App() {
       <Route
         path="/campuslegend/feedback"
         element={<CampusLegend />}
+      />
+
+      <Route
+        path="*"
+        element={<Error />}
       />
 
     </Routes>

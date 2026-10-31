@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import "./Tutorial.css";
 import { locations } from "../data/locations";
 
-function Tutorial({ active, onClose, setFiltersOpen, setIsInfoOpen, setMenuOpen, setToastContent, setToastActive, setSearchBar,
-    setSelectedLocation
+function Tutorial({ active, onClose, setFiltersOpen, setIsInfoOpen,onRecent, setToastContent, setToastActive, setSearchBar,
+    setSelectedLocation,
 }) {
     const [step, setStep] = useState(0);
     const [highlight, setHighlight] = useState(null);
@@ -51,7 +51,7 @@ function Tutorial({ active, onClose, setFiltersOpen, setIsInfoOpen, setMenuOpen,
             selector: "#recent-locations-btn",
             title: "Recent locations",
             text: "Access locations you have recently viewed so you can quickly find them again.",
-            action: () => setMenuOpen(true)
+            action: () => onRecent()
         }
     ];
 
@@ -61,7 +61,7 @@ function Tutorial({ active, onClose, setFiltersOpen, setIsInfoOpen, setMenuOpen,
         } else if (currentStep === 3) {
             setIsInfoOpen(false);
         } else if (currentStep === 6) {
-            setMenuOpen(false);
+            // setMenuOpen(false);
         }
     };
     useEffect(() => {

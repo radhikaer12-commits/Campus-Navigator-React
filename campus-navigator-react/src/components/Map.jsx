@@ -9,7 +9,6 @@ function Map({
     selectedLocation,
     selectedCategory,
     onLocationSelect,
-    setMenuOpen,
     route=[]
 }) {
 
@@ -57,7 +56,6 @@ function Map({
 
 
         onLocationSelect(location);
-        setMenuOpen(false);
     }
 
 

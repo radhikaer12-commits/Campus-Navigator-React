@@ -1,69 +1,100 @@
+
 import { useState } from "react";
-import MobileMenu from "./MobileMenu";
+import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import SearchFilters from "./SearchFilters";
-import MapThemePalette from "./MapThemePalette";
-import Filters from "./Filters";
 import MyLocation from "./MyLocation";
 
 function Header({
-    search, setSearch, setSelectedLocation, onTheme, setIsInfoOpen, darkMode, onHowToUse,
-    menuOpen, setMenuOpen, onRecent, onAbout, onLegend, setToastContent, setToastActive, currentLocation,
-    setSearchBar, isSearchBar
+    search,
+    setSearch,
+    setSelectedLocation,
+    onTheme,
+    setIsInfoOpen,
+    darkMode,
+    onHowToUse,
+    onRecent,
+    onAbout,
+    onLegend,
+    setToastContent,
+    setToastActive,
+    currentLocation,
+    setSearchBar,
+    isSearchBar
 }) {
     const [isFood, setOnFood] = useState(false);
-    function toggleMenu() {
-        setMenuOpen(!menuOpen);
+
+    if (
+        document.querySelector(".navigationUI")
+            ?.classList.contains("active")
+    ) {
+        document.querySelector("#search-wrapper")
+            ?.classList.add("hidden");
     }
-    function handleHowToUse() {
-        setMenuOpen(false);
-        onHowToUse();
-    }
-    if (document.querySelector(".navigationUI")?.classList.contains("active")) {
-        document.querySelector('#search-wrapper')?.classList.add('hidden');
-    };
+
     return (
-        <header>
-            <nav>
-                <div id="nav-title">
-                    <button id="logo">Explore <span>U.</span></button>
+            <header className="main-header">
+            {/* LEFT: Logo */}
+            <div className="header-logo">
+                <Link to="/" id="logo">
+                    Explore <span>U.</span>
+                </Link>
+            </div>
 
-                </div>
-                <div id='search-wrapper'>
-                    <SearchBar
-                        search={search}
-                        setSearch={setSearch}
-                        setSelectedLocation={setSelectedLocation}
-                        setIsInfoOpen={setIsInfoOpen}
-                        isFood={isFood}
-                        setOnFood={setOnFood}
-                        setToastActive={setToastActive}
-                        setToastContent={setToastContent}
-                        isSearchBar={isSearchBar}
-                        setSearchBar={setSearchBar}
-                    />
-                </div>
-                    <MyLocation currentLocation={currentLocation} setSelectedLocation={setSelectedLocation}
-                        setIsInfoOpen={setIsInfoOpen} />
+            {/* AFTER LOGO: Search */}
+            <div className="header-search">
+                <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                    setSelectedLocation={setSelectedLocation}
+                    setIsInfoOpen={setIsInfoOpen}
+                    isFood={isFood}
+                    setOnFood={setOnFood}
+                    setToastActive={setToastActive}
+                    setToastContent={setToastContent}
+                    isSearchBar={isSearchBar}
+                    setSearchBar={setSearchBar}
+                />
+            </div>
 
-                    <button id="menu-btn" aria-label="Open menu" aria-expanded={menuOpen}
-                        onClick={toggleMenu}
-                    > <i className={menuOpen
-                        ? "fa-solid fa-xmark"
-                        : "fa-solid fa-bars"
-                    }></i></button>
-                
+            {/* CENTRE: Navigation */}
+            <nav className="navbar-links">
+                <Link to="/" className="navbar-link">Home</Link>
+
+                <button
+                    id="recent-locations-btn"
+                    className="navbar-link"
+                    onClick={onRecent}
+                >
+                    Recent Locations
+                </button>
+
+                <button className="navbar-link" onClick={onLegend}>
+                    Campus Legend
+                </button>
+
+                <button className="navbar-link" onClick={onHowToUse}>
+                    How to Use
+                </button>
+
+                <button className="navbar-link" onClick={onAbout}>
+                    About
+                </button>
+
+                <button className="navbar-link" onClick={onTheme}>
+                    {darkMode ? "Light Mode" : "Dark Mode"}
+                </button>
             </nav>
-            <MobileMenu menuOpen={menuOpen}
-                onTheme={onTheme}
-                darkMode={darkMode}
-                onHowToUse={handleHowToUse}
-                onAbout={onAbout}
-                onLegend={onLegend}
-                onRecent={onRecent}
 
-            />
-        </header>
+            {/* RIGHT: Current Location */}
+            <div className="header-location">
+                <MyLocation
+                    currentLocation={currentLocation}
+                    setSelectedLocation={setSelectedLocation}
+                    setIsInfoOpen={setIsInfoOpen}
+                />
+            </div>
+    </header>
     );
 }
+
 export default Header;

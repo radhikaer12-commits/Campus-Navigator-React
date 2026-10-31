@@ -1,0 +1,13 @@
+.Main-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: red;
+    width: 100vw;
+    height: 100vh;
+}
+
+.Error-Message{
+    font-weight: 1000;
+    font-size: x-large;
+}

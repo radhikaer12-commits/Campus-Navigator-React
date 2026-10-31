@@ -1,6 +1,6 @@
 import { useState } from "react";
 import './landingpage.css';
-import MobileMenu from "./MobileMenu";
+// import MobileMenu from "./MobileMenu";
 import { useNavigate } from "react-router-dom";
 function LandingPage() {
     const [videoStarted, setVideoStarted] = useState(false);
@@ -44,7 +44,7 @@ function LandingPage() {
                 </p>
                 <br />
                 <button id="landing-explore-btn" onClick={handleExplore}>Explore Campus</button>
-                <MobileMenu/>
+                {/* <MobileMenu/> */}
             </div>
             <button id="landing-skip-btn" onClick={()=>{
                 navigate("/campus-navigator");

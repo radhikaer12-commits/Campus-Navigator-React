@@ -8,6 +8,7 @@ import CampusLegend from "./CampusLegend";
 import Tutorial from "./Tutorial";
 import RecentLocations from "./RecentLocations";
 import NavigationUI from "./NavigationUI";
+import About from './About';
 
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import HowToUse from "./HowToUse";
@@ -17,7 +18,7 @@ import { saveNotification } from "../utils/getNotifications";
 import { findShortestRoute } from "../utils/findShortestRoute";
 
 function CampusNavigator() {
-    const [menuOpen, setMenuOpen] = useState(false);
+    // const [menuOpen, setMenuOpen] = useState(false);
 
     const [selectedLocation, setSelectedLocation] = useState(() => {
         try {
@@ -186,13 +187,39 @@ function CampusNavigator() {
         }
         setRoute(path);
         setWalkTime(Math.round((path.weight ?? 0) * 0.1));
-        document.querySelector(".navigationUI").classList.add("active");
-        document.querySelector("header").style.display = "none";
-        document.querySelector("#current-location-container").style.display = "none";
+
+        document.querySelector(".navigationUI")?.classList.add("active");
+        document.querySelector("header")?.classList.add("navigation-header-hidden");
+        document.querySelector("#current-location-container")?.style.setProperty("display", "none");
+
         setIsInfoOpen(false);
         setFiltersOpen(false);
-        setMenuOpen(false);
     }
+
+    useEffect(() => {
+        const navigationUI = document.querySelector(".navigationUI");
+
+        if (!navigationUI) return;
+
+        const observer = new MutationObserver(() => {
+            if (!navigationUI.classList.contains("active")) {
+                document.querySelector("header")?.classList.remove("navigation-header-hidden");
+
+                const currentLocationContainer = document.querySelector("#current-location-container");
+
+                if (currentLocationContainer) {
+                    currentLocationContainer.style.display = "";
+                }
+            }
+        });
+
+        observer.observe(navigationUI, {
+            attributes: true,
+            attributeFilter: ["class"]
+        });
+
+        return () => observer.disconnect();
+    }, []);
 
 
     function handleLocationSelect(location) {
@@ -258,8 +285,8 @@ function CampusNavigator() {
                 setIsInfoOpen={setIsInfoOpen}
 
                 darkMode={darkMode}
-                menuOpen={menuOpen}
-                setMenuOpen={setMenuOpen}
+                // menuOpen={menuOpen}
+                // setMenuOpen={setMenuOpen}
                 onAbout={onAbout}
                 onLegend={onLegend}
                 onRecent={onRecent}
@@ -333,7 +360,7 @@ function CampusNavigator() {
                                 currentLocation
                             }
                             route={route}
-                            setMenuOpen={setMenuOpen}
+                            // setMenuOpen={setMenuOpen}
                             mapTheme={mapTheme}
                             setMapTheme={setMapTheme}
                             setSelectedCategory={setSelectedCategory}
@@ -439,7 +466,7 @@ function CampusNavigator() {
                         }
                         setFiltersOpen={setFiltersOpen}
                         setIsInfoOpen={setIsInfoOpen}
-                        setMenuOpen={setMenuOpen}
+                        onRecent={onRecent}
                         setToastContent={setToastContent}
                         setToastActive={setToastActive}
                         setSearchBar={setSearchBar}
